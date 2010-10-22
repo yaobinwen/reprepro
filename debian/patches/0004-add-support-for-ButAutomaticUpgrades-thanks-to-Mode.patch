@@ -1,0 +1,114 @@
+From 05d098def85d78f311d595482f7617bc9fc136b8 Mon Sep 17 00:00:00 2001
+From: Bernhard R. Link <brlink@debian.org>
+Date: Sat, 16 Oct 2010 12:47:56 +0000
+Subject: add support for ButAutomaticUpgrades (thanks to Modesta Vainius)
+
+---
+ distribution.c   |    3 +++
+ distribution.h   |    3 ++-
+ docs/manual.html |    3 ++-
+ docs/reprepro.1  |    7 +++++++
+ release.c        |    6 ++++++
+ 5 files changed, 20 insertions(+), 2 deletions(-)
+
+diff --git a/distribution.c b/distribution.c
+index 5c657d4..5e39965 100644
+--- a/distribution.c
++++ b/distribution.c
+@@ -52,6 +52,7 @@ static retvalue distribution_free(struct distribution *distribution) {
+ 		free(distribution->version);
+ 		free(distribution->origin);
+ 		free(distribution->notautomatic);
++		free(distribution->butautomaticupgrades);
+ 		free(distribution->label);
+ 		free(distribution->description);
+ 		free(distribution->signwith);
+@@ -387,6 +388,7 @@ CFallSETPROC(distribution, suite)
+ CFallSETPROC(distribution, version)
+ CFallSETPROC(distribution, origin)
+ CFallSETPROC(distribution, notautomatic)
++CFallSETPROC(distribution, butautomaticupgrades)
+ CFtruthSETPROC2(distribution, readonly, readonly)
+ CFallSETPROC(distribution, label)
+ CFallSETPROC(distribution, description)
+@@ -450,6 +452,7 @@ static const struct configfield distributionconfigfields[] = {
+ 	CF("Label",		distribution,	label),
+ 	CF("Log",		distribution,	logger),
+ 	CF("NotAutomatic",	distribution,	notautomatic),
++	CF("ButAutomaticUpgrades", distribution, butautomaticupgrades),
+ 	CF("Origin",		distribution,	origin),
+ 	CF("Pull",		distribution,	pulls),
+ 	CF("ReadOnly",		distribution,	readonly),
+diff --git a/distribution.h b/distribution.h
+index b62269a..5547c4a 100644
+--- a/distribution.h
++++ b/distribution.h
+@@ -35,7 +35,8 @@ struct distribution {
+ 	 * generated, may be NULL. only suite is sometimes used
+ 	 * (and only for sanity checks) */
+ 	/*@null@*/char *suite,*version;
+-	/*@null@*/char *origin,*label,*description,*notautomatic;
++	/*@null@*/char *origin, *label, *description,
++		*notautomatic, *butautomaticupgrades;
+ 	/* What architectures and components are there */
+ 	struct atomlist architectures, components;
+ 	/* which update rules to use */
+diff --git a/docs/manual.html b/docs/manual.html
+index 0e4c4d1..1d4d1a8 100644
+--- a/docs/manual.html
++++ b/docs/manual.html
+@@ -528,7 +528,8 @@ The following headers are copied verbatim to the Release file, if they exist:
+ <tt class="header">Architectures</tt> (excluding a possible value "<tt>source</tt>"),
+ <tt class="header">Components</tt>,
+ <tt class="header">Description</tt>, and
+-<tt class="header">NotAutomatic</tt>.
++<tt class="header">NotAutomatic</tt>,
++<tt class="header">ButAutomaticUpgrades</tt>.
+ <h4><a name="compression">Choosing compression and file names</a></h4>
+ Depending on the type of the index files, different files are generated.
+ No specifying anything is equivalent to:
+diff --git a/docs/reprepro.1 b/docs/reprepro.1
+index 1784ea5..ffa2d1f 100644
+--- a/docs/reprepro.1
++++ b/docs/reprepro.1
+@@ -1087,6 +1087,13 @@ Release files.
+ though anything but \fByes\fP does make much
+ sense right now.)
+ .TP
++.B ButAutomaticUpgrades
++This optional field is simply copied into the
++Release files.
++(The value is handled as arbitrary string,
++though anything but \fByes\fP does make much
++sense right now.)
++.TP
+ .B Description
+ This optional field is simply copied into the
+ Release files.
+diff --git a/release.c b/release.c
+index d9e6faa..4a5097e 100644
+--- a/release.c
++++ b/release.c
+@@ -1131,6 +1131,8 @@ retvalue release_directorydescription(struct release *release, const struct dist
+ 	release_writeheader("Architecture",
+ 			atoms_architectures[target->architecture_atom]);
+ 	release_writeheader("NotAutomatic",distribution->notautomatic);
++	release_writeheader("ButAutomaticUpgrades",
++			distribution->butautomaticupgrades);
+ 	release_writeheader("Description",distribution->description);
+ #undef release_writeheader
+ 	r = release_finishfile(release, f);
+@@ -1291,6 +1293,10 @@ retvalue release_prepare(struct release *release, struct distribution *distribut
+ 		writestring("\nNotAutomatic: ");
+ 		writestring(distribution->notautomatic);
+ 	}
++	if( distribution->butautomaticupgrades != NULL ) {
++		writestring("\nButAutomaticUpgrades: ");
++		writestring(distribution->butautomaticupgrades);
++	}
+ 	writechar('\n');
+ 
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+-- 
+1.5.6.5
+
