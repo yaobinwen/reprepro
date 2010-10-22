@@ -1,0 +1,24 @@
+From 19e449dc03710c09c6d5571e15a3c78f029bb7ff Mon Sep 17 00:00:00 2001
+From: Bernhard R. Link <brlink@debian.org>
+Date: Thu, 12 Aug 2010 14:15:42 +0000
+Subject: include sys/stat in filecntl.c
+
+---
+ filecntl.c |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/filecntl.c b/filecntl.c
+index 1da25f5..903349c 100644
+--- a/filecntl.c
++++ b/filecntl.c
+@@ -12,6 +12,7 @@
+ #include <stdbool.h>
+ #include <stdlib.h>
+ #include <unistd.h>
++#include <sys/stat.h>
+ #include <fcntl.h>
+ #include <stdio.h>
+ #include <errno.h>
+-- 
+1.5.6.5
+
