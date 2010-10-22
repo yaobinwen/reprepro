@@ -3,8 +3,9 @@ reprepro (4.2.0-2) unstable; urgency=low
   * include sys/stat.h in filecntl.h (Closes: 600982)
   * Don't get confused with packages only having special override
     entries
+  * adopt changelogs.example to new dpkg-source
 
- -- Bernhard R. Link <brlink@debian.org>  Fri, 22 Oct 2010 16:48:13 +0200
+ -- Bernhard R. Link <brlink@debian.org>  Fri, 22 Oct 2010 16:50:15 +0200
 
 reprepro (4.2.0-1) unstable; urgency=low
 

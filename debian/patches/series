@@ -1,2 +1,3 @@
 0001-include-sys-stat-in-filecntl.c.patch
 0002-Fix-error-in-reoverride-with-packages-that-have-a.patch
+0003-replace-sn-with-no-copy-in-changelogs.example.patch
