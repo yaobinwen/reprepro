@@ -1,0 +1,53 @@
+From ccafd1d03403fc068a3e3abc60998fd5480866b1 Mon Sep 17 00:00:00 2001
+From: Bernhard R. Link <brlink@debian.org>
+Date: Thu, 9 Sep 2010 16:48:46 +0000
+Subject: Fix error in reoverride with packages that have a "$Component" override but no other overrides. (reprepro erroneously thinks it is running out of memory in that case).
+
+---
+ binaries.c |    2 +-
+ override.c |    2 ++
+ sources.c  |    2 +-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/binaries.c b/binaries.c
+index e9e72bd..31e3228 100644
+--- a/binaries.c
++++ b/binaries.c
+@@ -280,7 +280,7 @@ retvalue binaries_doreoverride(const struct target *target, const char *packagen
+ 		return RET_NOTHING;
+ 
+ 	r = override_allreplacefields(o, &fields);
+-	if( RET_WAS_ERROR(r) )
++	if( !RET_IS_OK(r) )
+ 		return r;
+ 	newchunk = chunk_replacefields(controlchunk, fields, "Filename", false);
+ 	addfield_free(fields);
+diff --git a/override.c b/override.c
+index ba70b3d..9ef52f2 100644
+--- a/override.c
++++ b/override.c
+@@ -382,6 +382,8 @@ retvalue override_allreplacefields(const struct overridedata *override, struct f
+ 				return RET_ERROR_OOM;
+ 		}
+ 	}
++	if( fields == NULL )
++		return RET_NOTHING;
+ 	*fields_p = fields;
+ 	return RET_OK;
+ }
+diff --git a/sources.c b/sources.c
+index 8be47d0..c3944b1 100644
+--- a/sources.c
++++ b/sources.c
+@@ -336,7 +336,7 @@ retvalue sources_doreoverride(const struct target *target, const char *packagena
+ 		return RET_NOTHING;
+ 
+ 	r = override_allreplacefields(o, &fields);
+-	if( RET_WAS_ERROR(r) )
++	if( !RET_IS_OK(r) )
+ 		return r;
+ 	newchunk = chunk_replacefields(controlchunk, fields,
+ 			"Directory", true);
+-- 
+1.5.6.5
+
