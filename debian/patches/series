@@ -2,3 +2,4 @@
 0002-Fix-error-in-reoverride-with-packages-that-have-a.patch
 0003-replace-sn-with-no-copy-in-changelogs.example.patch
 0004-add-support-for-ButAutomaticUpgrades-thanks-to-Mode.patch
+0005-fix-typos-in-manpage.patch

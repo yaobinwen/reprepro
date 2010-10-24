@@ -1,0 +1,36 @@
+From 6fb57dc033bb873d13e3827c9fcb20aca6ca5cec Mon Sep 17 00:00:00 2001
+From: Bernhard R. Link <brlink@debian.org>
+Date: Sun, 24 Oct 2010 08:58:11 +0000
+Subject: fix typos in manpage
+
+---
+ docs/reprepro.1 |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/docs/reprepro.1 b/docs/reprepro.1
+index ffa2d1f..e993ed8 100644
+--- a/docs/reprepro.1
++++ b/docs/reprepro.1
+@@ -1083,15 +1083,15 @@ Release files.
+ .B NotAutomatic
+ This optional field is simply copied into the
+ Release files.
+-(The value is handled as arbitrary string,
+-though anything but \fByes\fP does make much
++(The value is handled as an arbitrary string,
++though anything but \fByes\fP does not make much
+ sense right now.)
+ .TP
+ .B ButAutomaticUpgrades
+ This optional field is simply copied into the
+ Release files.
+-(The value is handled as arbitrary string,
+-though anything but \fByes\fP does make much
++(The value is handled as an arbitrary string,
++though anything but \fByes\fP does not make much
+ sense right now.)
+ .TP
+ .B Description
+-- 
+1.5.6.5
+
