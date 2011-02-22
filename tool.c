@@ -686,7 +686,7 @@ static retvalue read_dscfile(const char *fullfilename, struct dscfile **dsc) {
 			return r;
 		}
 	}
-	r = checksumsarray_parse(&n->expected, filelines, fullfilename);
+	r = checksumsarray_parse(&n->expected, filelines, fullfilename, true);
 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
 		strlist_done(&filelines[cs]);
 	}
