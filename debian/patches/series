@@ -3,3 +3,4 @@
 0003-replace-sn-with-no-copy-in-changelogs.example.patch
 0004-add-support-for-ButAutomaticUpgrades-thanks-to-Mode.patch
 0005-fix-typos-in-manpage.patch
+0006-support-Release-files-without-MD5Sum.patch

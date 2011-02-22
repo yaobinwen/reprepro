@@ -1,0 +1,223 @@
+From b13d42711ce90193af66d6dc9e208c849d59b787 Mon Sep 17 00:00:00 2001
+From: Bernhard R. Link <brlink@debian.org>
+Date: Tue, 22 Feb 2011 20:21:17 +0100
+Subject: support Release files without MD5Sum
+
+If a Release file has no MD5Sum field, fall back to only
+use the other Checksums.
+
+This patch is similar to the one in 4.5.0 but more specific
+to avoid any changes in cases where there is a MD5Sum field.
+
+Bug-Debian: 614361
+---
+ checksums.c   |   59 ++++++++++++++++++++++++++++++++++++--------------------
+ checksums.h   |    2 +-
+ readrelease.c |   23 +++++++++++++--------
+ sources.c     |    6 ++--
+ tool.c        |    2 +-
+ 5 files changed, 57 insertions(+), 35 deletions(-)
+
+diff --git a/checksums.c b/checksums.c
+index af38753..fa66b5c 100644
+--- a/checksums.c
++++ b/checksums.c
+@@ -674,15 +674,23 @@ retvalue hashline_parse(const char *filenametoshow, const char *line, enum check
+ 	return RET_OK;
+ }
+ 
+-retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l[cs_hashCOUNT], const char *filenametoshow) {
++retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l[cs_hashCOUNT], const char *filenametoshow, bool havemd5) {
+ 	retvalue r;
+ 	int i;
+ 	struct checksumsarray a;
+ 	struct strlist filenames;
+-	size_t count = l[cs_md5sum].count;
++	size_t count;
+ 	struct hashes *parsed;
+ 	enum checksumtype cs;
+ 
++	if( havemd5 ) {
++		count = l[cs_md5sum].count;
++	} else {
++		count = 0;
++		for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ )
++			count += l[cs].count;
++	}
++
+ 	parsed = calloc(count, sizeof(struct hashes));
+ 	if( FAILEDTOALLOC(parsed) ) {
+ 		return RET_ERROR_OOM;
+@@ -741,35 +749,44 @@ retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l
+ 			} else {
+ 				struct hash_data *hashes;
+ 
+-				// TODO: suboptimal, as we know where
+-				// it likely is...
+ 				fileofs = strlist_ofs(&filenames, filename);
+ 				if( fileofs == -1 ) {
+-				// TODO: future versions might add files
+-				// her to the previous know ones instead,
+-				// once md5sum hash may be empty...
+-					fprintf(stderr,
++					if( havemd5 ) {
++						fprintf(stderr,
+ "WARNING: %s checksum line ' %s' in '%s' has no corresponding Files line!\n",
+-						hash_name[cs], line,
+-						filenametoshow);
+-				}
+-				hashes = parsed[fileofs].hashes;
+-				if( unlikely( hashes[cs_length].len
+-				              != size_len
+-				          || memcmp(hashes[cs_length].start,
+-				               size_start, size_len) != 0) ) {
+-					fprintf(stderr,
++							hash_name[cs], line,
++							filenametoshow);
++						continue;
++					}
++					fileofs = filenames.count;
++					r = strlist_add_dup(&filenames, filename);
++					if( RET_WAS_ERROR(r) ) {
++						strlist_done(&filenames);
++						free(parsed);
++						return r;
++					}
++					hashes = parsed[fileofs].hashes;
++					hashes[cs_length].start = size_start;
++					hashes[cs_length].len = size_len;
++				} else {
++					hashes = parsed[fileofs].hashes;
++					if( unlikely( hashes[cs_length].len
++					              != size_len
++					          || memcmp(hashes[cs_length].start,
++					               size_start, size_len) != 0) ) {
++							fprintf(stderr,
+ "WARNING: %s checksum line ' %s' in '%s' contradicts 'Files' filesize!\n",
+-						hash_name[cs], line,
+-						filenametoshow);
+-					continue;
++							hash_name[cs], line,
++							filenametoshow);
++						continue;
++					}
+ 				}
+ 				hashes[cs].start = hash_start;
+ 				hashes[cs].len = hash_len;
+ 			}
+ 		}
+ 	}
+-	assert( count == (size_t)filenames.count );
++	assert( count >= (size_t)filenames.count );
+ 
+ 	if( filenames.count == 0 ) {
+ 		strlist_done(&filenames);
+diff --git a/checksums.h b/checksums.h
+index 2f8b3ff..9fbf890 100644
+--- a/checksums.h
++++ b/checksums.h
+@@ -107,7 +107,7 @@ struct checksumsarray {
+ };
+ void checksumsarray_move(/*@out@*/struct checksumsarray *, /*@special@*/struct checksumsarray *array)/*@requires maxSet(array->names.values) >= array->names.count /\ maxSet(array->checksums) >= array->names.count @*/ /*@releases array->checksums, array->names.values @*/;
+ void checksumsarray_done(/*@special@*/struct checksumsarray *array) /*@requires maxSet(array->names.values) >= array->names.count /\ maxSet(array->checksums) >= array->names.count @*/ /*@releases array->checksums, array->names.values @*/;
+-retvalue checksumsarray_parse(/*@out@*/struct checksumsarray *, const struct strlist [cs_hashCOUNT], const char *filenametoshow);
++retvalue checksumsarray_parse(/*@out@*/struct checksumsarray *, const struct strlist [cs_hashCOUNT], const char *filenametoshow, bool havemd5);
+ retvalue checksumsarray_genfilelist(const struct checksumsarray *, /*@out@*/char **, /*@out@*/char **, /*@out@*/char **);
+ retvalue checksumsarray_include(struct checksumsarray *, /*@only@*/char *, const struct checksums *);
+ void checksumsarray_resetunsupported(const struct checksumsarray *, bool[cs_hashCOUNT]);
+diff --git a/readrelease.c b/readrelease.c
+index 3def5d9..f5cd758 100644
+--- a/readrelease.c
++++ b/readrelease.c
+@@ -32,6 +32,8 @@ retvalue release_getchecksums(const char *releasefile, const bool ignore[cs_hash
+ 	char *chunk;
+ 	struct strlist files[cs_hashCOUNT];
+ 	enum checksumtype cs;
++	bool foundchecksums = false;
++	bool havemd5 = true;
+ 
+ 	r = readtextfile(releasefile, releasefile, &chunk, NULL);
+ 	assert( r != RET_NOTHING );
+@@ -47,23 +49,26 @@ retvalue release_getchecksums(const char *releasefile, const bool ignore[cs_hash
+ 				&files[cs]);
+ 		if( r == RET_NOTHING ) {
+ 			if( cs == cs_md5sum ) {
+-				fprintf(stderr,
+-"Missing 'MD5Sum' field in Release file '%s'!\n",	releasefile);
+-				r = RET_ERROR;
+-			} else
+-				strlist_init(&files[cs]);
+-		}
+-		if( RET_WAS_ERROR(r) ) {
++				havemd5 = false;
++			}
++			strlist_init(&files[cs]);
++		} else if( RET_WAS_ERROR(r) ) {
+ 			while( cs-- > cs_md5sum ) {
+ 				strlist_done(&files[cs]);
+ 			}
+ 			free(chunk);
+ 			return r;
+-		}
++		} else
++			foundchecksums = true;
+ 	}
+ 	free(chunk);
++	if( !foundchecksums ) {
++		fprintf(stderr,
++"Missing 'MD5Sum' field in Release file '%s'!\n",	releasefile);
++		return RET_ERROR;
++	}
+ 
+-	r = checksumsarray_parse(out, files, releasefile);
++	r = checksumsarray_parse(out, files, releasefile, havemd5);
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+ 		strlist_done(&files[cs]);
+ 	}
+diff --git a/sources.c b/sources.c
+index c3944b1..77155f6 100644
+--- a/sources.c
++++ b/sources.c
+@@ -165,7 +165,7 @@ retvalue sources_getinstalldata(const struct target *t, const char *packagename,
+ 			return r;
+ 		}
+ 	}
+-	r = checksumsarray_parse(&files, filelines, packagename);
++	r = checksumsarray_parse(&files, filelines, packagename, true);
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+ 		strlist_done(&filelines[cs]);
+ 	}
+@@ -303,7 +303,7 @@ retvalue sources_getchecksums(const char *chunk, struct checksumsarray *out) {
+ 			return r;
+ 		}
+ 	}
+-	r = checksumsarray_parse(&a, filelines, "source chunk");
++	r = checksumsarray_parse(&a, filelines, "source chunk", true);
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+ 		strlist_done(&filelines[cs]);
+ 	}
+@@ -529,7 +529,7 @@ retvalue sources_readdsc(struct dsc_headers *dsc, const char *filename, const ch
+ 			return r;
+ 		}
+ 	}
+-	r = checksumsarray_parse(&dsc->files, filelines, filenametoshow);
++	r = checksumsarray_parse(&dsc->files, filelines, filenametoshow, true);
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+ 		strlist_done(&filelines[cs]);
+ 	}
+diff --git a/tool.c b/tool.c
+index b6ab2f2..ba9fa64 100644
+--- a/tool.c
++++ b/tool.c
+@@ -686,7 +686,7 @@ static retvalue read_dscfile(const char *fullfilename, struct dscfile **dsc) {
+ 			return r;
+ 		}
+ 	}
+-	r = checksumsarray_parse(&n->expected, filelines, fullfilename);
++	r = checksumsarray_parse(&n->expected, filelines, fullfilename, true);
+ 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
+ 		strlist_done(&filelines[cs]);
+ 	}
+-- 
+1.5.6.5
+

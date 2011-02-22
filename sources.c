@@ -165,7 +165,7 @@ retvalue sources_getinstalldata(const struct target *t, const char *packagename,
 			return r;
 		}
 	}
-	r = checksumsarray_parse(&files, filelines, packagename);
+	r = checksumsarray_parse(&files, filelines, packagename, true);
 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
 		strlist_done(&filelines[cs]);
 	}
@@ -303,7 +303,7 @@ retvalue sources_getchecksums(const char *chunk, struct checksumsarray *out) {
 			return r;
 		}
 	}
-	r = checksumsarray_parse(&a, filelines, "source chunk");
+	r = checksumsarray_parse(&a, filelines, "source chunk", true);
 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
 		strlist_done(&filelines[cs]);
 	}
@@ -529,7 +529,7 @@ retvalue sources_readdsc(struct dsc_headers *dsc, const char *filename, const ch
 			return r;
 		}
 	}
-	r = checksumsarray_parse(&dsc->files, filelines, filenametoshow);
+	r = checksumsarray_parse(&dsc->files, filelines, filenametoshow, true);
 	for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ ) {
 		strlist_done(&filelines[cs]);
 	}

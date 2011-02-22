@@ -674,14 +674,22 @@ retvalue hashline_parse(const char *filenametoshow, const char *line, enum check
 	return RET_OK;
 }
 
-retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l[cs_hashCOUNT], const char *filenametoshow) {
+retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l[cs_hashCOUNT], const char *filenametoshow, bool havemd5) {
 	retvalue r;
 	int i;
 	struct checksumsarray a;
 	struct strlist filenames;
-	size_t count = l[cs_md5sum].count;
+	size_t count;
 	struct hashes *parsed;
 	enum checksumtype cs;
+
+	if( havemd5 ) {
+		count = l[cs_md5sum].count;
+	} else {
+		count = 0;
+		for( cs = cs_md5sum ; cs < cs_hashCOUNT ; cs++ )
+			count += l[cs].count;
+	}
 
 	parsed = calloc(count, sizeof(struct hashes));
 	if( FAILEDTOALLOC(parsed) ) {
@@ -741,35 +749,44 @@ retvalue checksumsarray_parse(struct checksumsarray *out, const struct strlist l
 			} else {
 				struct hash_data *hashes;
 
-				// TODO: suboptimal, as we know where
-				// it likely is...
 				fileofs = strlist_ofs(&filenames, filename);
 				if( fileofs == -1 ) {
-				// TODO: future versions might add files
-				// her to the previous know ones instead,
-				// once md5sum hash may be empty...
-					fprintf(stderr,
+					if( havemd5 ) {
+						fprintf(stderr,
 "WARNING: %s checksum line ' %s' in '%s' has no corresponding Files line!\n",
-						hash_name[cs], line,
-						filenametoshow);
-				}
-				hashes = parsed[fileofs].hashes;
-				if( unlikely( hashes[cs_length].len
-				              != size_len
-				          || memcmp(hashes[cs_length].start,
-				               size_start, size_len) != 0) ) {
-					fprintf(stderr,
+							hash_name[cs], line,
+							filenametoshow);
+						continue;
+					}
+					fileofs = filenames.count;
+					r = strlist_add_dup(&filenames, filename);
+					if( RET_WAS_ERROR(r) ) {
+						strlist_done(&filenames);
+						free(parsed);
+						return r;
+					}
+					hashes = parsed[fileofs].hashes;
+					hashes[cs_length].start = size_start;
+					hashes[cs_length].len = size_len;
+				} else {
+					hashes = parsed[fileofs].hashes;
+					if( unlikely( hashes[cs_length].len
+					              != size_len
+					          || memcmp(hashes[cs_length].start,
+					               size_start, size_len) != 0) ) {
+							fprintf(stderr,
 "WARNING: %s checksum line ' %s' in '%s' contradicts 'Files' filesize!\n",
-						hash_name[cs], line,
-						filenametoshow);
-					continue;
+							hash_name[cs], line,
+							filenametoshow);
+						continue;
+					}
 				}
 				hashes[cs].start = hash_start;
 				hashes[cs].len = hash_len;
 			}
 		}
 	}
-	assert( count == (size_t)filenames.count );
+	assert( count >= (size_t)filenames.count );
 
 	if( filenames.count == 0 ) {
 		strlist_done(&filenames);
