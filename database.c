@@ -1854,7 +1854,7 @@ retvalue database_droppackages(const char *identifier) {
 retvalue database_openfiles(void) {
 	retvalue r;
 	struct strlist identifiers;
-	bool checksumsexisted, oldfiles;
+	bool oldfiles;
 
 	assert (rdb_checksums == NULL);
 	assert (rdb_contents == NULL);
@@ -1874,7 +1874,6 @@ retvalue database_openfiles(void) {
 		strlist_done(&identifiers);
 	}
 
-	r = database_hasdatabasefile("checksums.db", &checksumsexisted);
 	r = database_table("checksums.db", "pool",
 			dbt_BTREE, DB_CREATE,
 			&rdb_checksums);
