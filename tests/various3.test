@@ -779,28 +779,29 @@ Files:
 EOF
 dodiff results.expected results
 testout "" -b . dumpreferences
+sort results > results.sorted
 cat > results.expected <<EOF
 a aa 1-3 pool/all/a/aa/aa-addons_1-3_all.deb
-a|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
-b|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
 a aa 1-3 pool/all/a/aa/aa_1-3.dsc
-a|all|source pool/all/a/aa/aa_1-3.dsc
 a aa 1-3 pool/all/a/aa/aa_1-3.tar.gz
-a|all|source pool/all/a/aa/aa_1-3.tar.gz
 a aa 1-3 pool/all/a/aa/aa_1-3_abacus.deb
-a|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
-b|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
 a ab 3-1 pool/all/a/ab/ab-addons_3-1_all.deb
-a|all|abacus pool/all/a/ab/ab-addons_3-1_all.deb
 a ab 3-1 pool/all/a/ab/ab_3-1.dsc
-a|all|source pool/all/a/ab/ab_3-1.dsc
 a ab 3-1 pool/all/a/ab/ab_3-1.tar.gz
-a|all|source pool/all/a/ab/ab_3-1.tar.gz
 a ab 3-1 pool/all/a/ab/ab_3-1_abacus.deb
+a|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
+a|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
+a|all|abacus pool/all/a/ab/ab-addons_3-1_all.deb
 a|all|abacus pool/all/a/ab/ab_3-1_abacus.deb
+a|all|source pool/all/a/aa/aa_1-3.dsc
+a|all|source pool/all/a/aa/aa_1-3.tar.gz
+a|all|source pool/all/a/ab/ab_3-1.dsc
+a|all|source pool/all/a/ab/ab_3-1.tar.gz
+b|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
+b|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
 b|all|abacus pool/all/a/ab/ab_3-1_abacus.deb
 EOF
-dodiff results.expected results
+dodiff results.expected results.sorted
 fi
 rm -r -f db2
 cp -a db db2
@@ -903,20 +904,21 @@ testout "" -b . dumptracks
 dodiff /dev/null results
 fi
 testout "" -b . dumpreferences
+sort results > results.sorted
 cat > results.expected <<EOF
 a|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
-b|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
+a|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
+a|all|abacus pool/all/a/ab/ab-addons_3-1_all.deb
+a|all|abacus pool/all/a/ab/ab_3-1_abacus.deb
 a|all|source pool/all/a/aa/aa_1-3.dsc
 a|all|source pool/all/a/aa/aa_1-3.tar.gz
-a|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
-b|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
-a|all|abacus pool/all/a/ab/ab-addons_3-1_all.deb
 a|all|source pool/all/a/ab/ab_3-1.dsc
 a|all|source pool/all/a/ab/ab_3-1.tar.gz
-a|all|abacus pool/all/a/ab/ab_3-1_abacus.deb
+b|all|abacus pool/all/a/aa/aa-addons_1-3_all.deb
+b|all|abacus pool/all/a/aa/aa_1-3_abacus.deb
 b|all|abacus pool/all/a/ab/ab_3-1_abacus.deb
 EOF
-dodiff results.expected results
+dodiff results.expected results.sorted
 cat > conf/distributions <<EOF
 Codename: X
 Architectures: none
@@ -976,5 +978,5 @@ dodiff /dev/null results
 rm -r dists
 done
 rm -r db db2 conf lists logs
-rm aa* ab* ac* results.log.expected results.expected results
+rm aa* ab* ac* results.log.expected results.expected results results.sorted
 testsuccess

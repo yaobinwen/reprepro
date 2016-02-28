@@ -1734,7 +1734,7 @@ dodiff results.expected results
 testout "" -b . dumpunreferenced
 dodiff /dev/null results
 testout ""  -b . dumpreferences
-cp results results.expected
+sort results > results.expected
 testrun - -b . rereference 3<<EOF
 stdout
 -v1*=Referencing test1...
@@ -1771,7 +1771,8 @@ stdout
 -v3*=Referencing test2|ugly|source...
 EOF
 testout ""  -b . dumpreferences
-dodiff results results.expected
+sort results > results.sorted
+dodiff results.expected results.sorted
 rm db/references.db
 testrun - -b . rereference 3<<EOF
 stdout
@@ -1809,9 +1810,11 @@ stdout
 -v3*=Referencing test2|ugly|source...
 EOF
 testout ""  -b . dumpreferences
-dodiff results results.expected
+sort results > results.sorted
+dodiff results.expected results.sorted
 testout ""  -b . dumpreferences
-dodiff results.expected results
+sort results > results.sorted
+dodiff results.expected results.sorted
 
 sed -i -e 's/^Tracking: minimal/Tracking: keep includechanges/' conf/distributions
 mv db/savedtracking.db db/tracking.db
@@ -2453,7 +2456,7 @@ dodiff /dev/null results
 rm -r dists db conf conf2 logs lists
 rm 4test* bloat* simple* test_* test-* testb* differently* filename_version.tar.gz
 rm test1 test2 test2.changes broken.changes test.changes fakesuper db.out*
-rm results results.expected results.log.expected includeerror.rules
+rm results results.expected results.log.expected includeerror.rules results.sorted
 dodo test ! -d pool
 
 testsuccess

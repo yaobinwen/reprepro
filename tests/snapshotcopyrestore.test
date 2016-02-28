@@ -369,8 +369,8 @@ EOF
 REPREPRO_OUT_DIR=. "$SRCDIR"/docs/outstore.py --check
 
 testout "" -b . dumpreferences
-grep '^.|' results | sed -e 's/|[^ ]* / contains /' | uniq > references.normal
-grep '^s=' results | sed -e 's/^s=\(.\)=[^ ]* /\1 contains /' > references.snapshot
+grep '^.|' results | sed -e 's/|[^ ]* / contains /' | sort | uniq > references.normal
+grep '^s=' results | sed -e 's/^s=\(.\)=[^ ]* /\1 contains /' | sort > references.snapshot
 dodiff -u references.normal references.snapshot
 rm references.normal references.snapshot
 # Remove contents from original, to make them more look alike:
