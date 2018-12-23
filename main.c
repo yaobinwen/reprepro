@@ -841,7 +841,7 @@ static retvalue remove_packages(struct distribution *distribution, struct remove
 	}
 	return package_remove_each(distribution,
 			// TODO: why not arch comp pt here?
-			atom_unknown, atom_unknown, atom_unknown,
+			NULL, NULL, NULL,
 			package_source_fits, NULL,
 			toremove);
 }
@@ -4137,7 +4137,7 @@ static retvalue callaction(command_t command, const struct action *action, int a
 
 		result = action->start(alldistributions,
 				x_section, x_priority,
-				atom_unknown, atom_unknown, atom_unknown,
+				NULL, NULL, NULL,
 				argc, argv);
 		logger_wait();
 

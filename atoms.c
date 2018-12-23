@@ -213,12 +213,12 @@ retvalue atom_intern(enum atom_type type, const char *value, atom_t *atom_p) {
 
 void atomlist_init(struct atomlist *list) {
 	list->count = 0; list->size = 0;
-	list->atoms = 0;
+	list->atoms = NULL;
 }
 
 void atomlist_done(struct atomlist *list) {
 	if (list->size > 0) {
-		assert (list->atoms != 0);
+		assert (list->atoms != NULL);
 		free(list->atoms);
 	}
 	/* reset atoms but not size, so reuse can be caught */
