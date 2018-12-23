@@ -24,7 +24,7 @@
 
 int ignored[IGN_COUNT];
 bool ignore[IGN_COUNT];
-enum config_option_owner owner_ignore[IGN_COUNT];
+static enum config_option_owner owner_ignore[IGN_COUNT];
 
 static const char * const ignores[] = {
 #define IGN(what) #what ,

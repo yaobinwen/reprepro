@@ -29,7 +29,7 @@
 #include "configparser.h"
 #include "filterlist.h"
 
-struct filterlistfile {
+static struct filterlistfile {
 	size_t reference_count;
 
 	char *filename;

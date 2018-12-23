@@ -140,7 +140,7 @@ static off_t reservedotherspace = 1024*1024;
 
 /* define for each config value an owner, and only higher owners are allowed
  * to change something owned by lower owners. */
-enum config_option_owner config_state,
+static enum config_option_owner config_state,
 #define O(x) owner_ ## x = CONFIG_OWNER_DEFAULT
 O(fast), O(x_morguedir), O(x_outdir), O(x_basedir), O(x_distdir), O(x_dbdir), O(x_listdir), O(x_confdir), O(x_logdir), O(x_methoddir), O(x_section), O(x_priority), O(x_component), O(x_architecture), O(x_packagetype), O(nothingiserror), O(nolistsdownload), O(keepunusednew), O(keepunreferenced), O(keeptemporaries), O(keepdirectories), O(askforpassphrase), O(skipold), O(export), O(waitforlock), O(spacecheckmode), O(reserveddbspace), O(reservedotherspace), O(guessgpgtty), O(verbosedatabase), O(gunzip), O(bunzip2), O(unlzma), O(unxz), O(lunzip), O(gnupghome), O(listformat), O(listmax), O(listskip), O(onlysmalldeletes), O(endhook), O(outhook);
 #undef O
@@ -4388,7 +4388,7 @@ LO_ENDHOOK,
 LO_OUTHOOK,
 LO_UNIGNORE};
 static int longoption = 0;
-const char *programname;
+static const char *programname;
 
 static void setexport(const char *argument) {
 	if (strcasecmp(argument, "silent-never") == 0) {

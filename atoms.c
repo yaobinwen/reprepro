@@ -26,7 +26,7 @@
 
 const char **atoms_architectures;
 const char **atoms_components;
-const char * const packagetypes[4] = { "!!NONE!!", "dsc", "deb", "udeb" };
+static const char * const packagetypes[4] = { "!!NONE!!", "dsc", "deb", "udeb" };
 const char **atoms_packagetypes = (const char **)&packagetypes;
 const char **atoms_commands;
 static int command_count;
