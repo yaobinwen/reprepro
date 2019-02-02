@@ -706,7 +706,7 @@ _changestool()
 				fi
 			done
 			COMPREPLY=( $( compgen -W "${options[@]}" -- $cur ) )
-			# if some .dsc cannot be found or read, offer everythin additionally
+			# if some .dsc cannot be found or read, offer everything additionally
 			if [ "$cmd" = "missing" ] ; then
 				_filedir
 			fi
