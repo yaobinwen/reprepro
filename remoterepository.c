@@ -1113,7 +1113,7 @@ static inline retvalue find_requested_encoding(struct remote_index *ri, const ch
 
 		/* nothing that is both requested by the user and supported
 		 * and listed in the Release file found, check what is there
-		 * to get a meaningfull error message */
+		 * to get a meaningful error message */
 
 		for (c = 0 ; c < c_COUNT ; c++) {
 			if (ri->ofs[c] < 0)

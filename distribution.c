@@ -308,7 +308,7 @@ CFfinishparse(distribution) {
 	n->firstline = config_firstline(iter);
 	n->lastline = config_line(iter) - 1;
 
-	/* Do some consitency checks */
+	/* Do some consistency checks */
 	for (d = mydata->distributions; d != NULL; d = d->next) {
 		if (strcmp(d->codename, n->codename) == 0) {
 			fprintf(stderr,

@@ -2610,7 +2610,7 @@ ACTION_F(y, n, y, y, repairdescriptions) {
 	return result;
 }
 
-/*****************adding checkums of files again*****************/
+/*****************adding checksums of files again*****************/
 
 ACTION_F(y, n, y, y, redochecksums) {
 	retvalue result, r;

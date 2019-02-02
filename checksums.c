@@ -52,7 +52,7 @@ const char * const release_checksum_names[cs_hashCOUNT] = {
  * first some hashes, whose type is determined by a single character
  * (also yet unknown hashes are supported and should be preserved, but are
  *  not generated)
- * after that the md5sum and finaly the size in dezimal representation.
+ * after that the md5sum and finally the size in dezimal representation.
  *
  * Checksums are parsed and stored in a structure for fast access of their
  * known parts:
@@ -112,7 +112,7 @@ retvalue checksums_init(/*@out@*/struct checksums **checksums_p, char *hashes[cs
 				|| (*p >= 'A' && *p <= 'F'))
 			p++;
 		if (*p != '\0') {
-			// TODO: find way to give more meaningfull error message
+			// TODO: find way to give more meaningful error message
 			fprintf(stderr, "Invalid md5 hash: '%s'\n",
 					hashes[cs_md5sum]);
 			for (type = cs_md5sum ; type < cs_COUNT ; type++)
@@ -124,7 +124,7 @@ retvalue checksums_init(/*@out@*/struct checksums **checksums_p, char *hashes[cs
 	while ((*p >= '0' && *p <= '9'))
 		p++;
 	if (*p != '\0') {
-		// TODO: find way to give more meaningfull error message
+		// TODO: find way to give more meaningful error message
 		fprintf(stderr, "Invalid size: '%s'\n", size);
 		for (type = cs_md5sum ; type < cs_COUNT ; type++)
 			free(hashes[type]);
@@ -139,7 +139,7 @@ retvalue checksums_init(/*@out@*/struct checksums **checksums_p, char *hashes[cs
 				|| (*p >= 'A' && *p <= 'F'))
 			p++;
 		if (*p != '\0') {
-			// TODO: find way to give more meaningfull error message
+			// TODO: find way to give more meaningful error message
 			fprintf(stderr, "Invalid hash: '%s'\n", hashes[type]);
 			for (type = cs_md5sum ; type < cs_COUNT ; type++)
 				free(hashes[type]);

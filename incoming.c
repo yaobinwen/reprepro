@@ -58,7 +58,7 @@ enum permitflags {
 	pmf_unused_files = 0,
 	/* do not error out if there already is a newer package */
 	pmf_oldpackagenewer,
-	/* do not error out if there there are unadvertised binary files */
+	/* do not error out if there are unadvertised binary files */
 	pmf_unlistedbinaries,
 	pmf_COUNT /* must be last */
 };
