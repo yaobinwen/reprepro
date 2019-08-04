@@ -1,3 +1,7 @@
+2019-08-04 Bernhard R. Link
+	* mark 'dumpcontents' command as deprecated
+
+
 2019-02-02 Bernhard R. Link <brlink@debian.org>
 	* handle a missing Binary field in a .changes file like an empty one.
 	  (So not having one in a source only upload will be ignored,
