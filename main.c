@@ -4416,7 +4416,7 @@ static void setexport(const char *argument) {
 		return;
 	}
 	fprintf(stderr,
-"Error: --export needs an argument of 'never', 'normal' or 'force', but got '%s'\n",
+"Error: --export needs an argument of 'silenv-never', 'never', 'changed', 'lookedat' or 'force', but got '%s'\n",
 			argument);
 	exit(EXIT_FAILURE);
 }

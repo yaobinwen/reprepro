@@ -252,7 +252,7 @@ _reprepro()
 				return 0
 				;;
 			--export)
-        			COMPREPLY=( $( compgen -W "never changed normal force" -- $cur ) )
+				COMPREPLY=( $( compgen -W "silent-never never changed lookedat force" -- $cur ) )
 				return 0
 				;;
 			--waitforlock)

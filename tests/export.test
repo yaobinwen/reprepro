@@ -65,7 +65,7 @@ EOF
 
 dodo grep '^Valid-Until:' dists/o/Release
 
-testrun - -b . --export=normal remove o nothing 3<<EOF
+testrun - -b . --export=lookedat remove o nothing 3<<EOF
 stderr
 -v0*=Not removed as not found: nothing
 stdout

@@ -132,7 +132,7 @@ EOF
 checklog logab < /dev/null
 test ! -d dists/a
 test ! -d dists/b
-testrun - -b . --export=normal pull b 3<<EOF
+testrun - -b . --export=lookedat pull b 3<<EOF
 stdout
 -v0*=Calculating packages to pull...
 -v3*=  pulling into 'b|all|abacus'
@@ -149,7 +149,7 @@ EOF
 checklog logab < /dev/null
 test ! -d dists/a
 test -d dists/b
-testrun - -b . --export=normal pull a b 3<<EOF
+testrun - -b . --export=lookedat pull a b 3<<EOF
 stdout
 -v0*=Calculating packages to pull...
 -v3*=  pulling into 'b|all|abacus'
