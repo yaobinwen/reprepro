@@ -352,30 +352,34 @@ The program has to accept the compressed file as stdin and write
 the uncompressed file into stdout.
 .TP
 .BI \-\-bunzip2 " bz2-uncompressor"
-When uncompressing downloaded index files or when not linked against \fBlibbz2\fP
+When uncompressing downloaded index files or if not linked against \fBlibbz2\fP
 reprepro will use this program to uncompress \fB.bz2\fP files.
 The default value is \fBbunzip2\fP.
 If the program is not found or is \fBNONE\fP (all-uppercase) then uncompressing
 will always be done using the built in uncompression method or not be possible
-when not linked against \fBlibbz2\fP.
+if not linked against \fBlibbz2\fP.
 The program has to accept the compressed file as stdin and write
 the uncompressed file into stdout.
 .TP
 .BI \-\-unlzma " lzma-uncompressor"
-When trying to uncompress or read \fPlzma\fP compressed files, this program
-will be used.
+When uncompressing downloaded index files or if not linked against \fBliblzma\fP
+reprepro will use this program to uncompress \fB.lzma\fP files.
 The default value is \fBunlzma\fP.
-If the program is not found or is \fBNONE\fP (all-uppercase) then uncompressing
-lzma files will not be possible.
+If the program is not found or is \fBNONE\fP (all-uppercase)
+then uncompressing lzma files will always be done using
+the built in uncompression method
+or not be possible if not linked against \fBliblzma\fP.
 The program has to accept the compressed file as stdin and write
 the uncompressed file into stdout.
 .TP
 .BI \-\-unxz " xz-uncompressor"
-When trying to uncompress or read \fPxz\fP compressed files, this program
-will be used.
+When uncompressing downloaded index files or if not linked against \fBliblzma\fP
+reprepro will use this program to uncompress \fB.xz\fP files.
 The default value is \fBunxz\fP.
-If the program is not found or is \fBNONE\fP (all-uppercase) then uncompressing
-xz files will not be possible.
+If the program is not found or is \fBNONE\fP (all-uppercase)
+then uncompressing xz files will always be done using
+the built in uncompression method
+or not be possible if not linked against \fBliblzma\fP.
 The program has to accept the compressed file as stdin and write
 the uncompressed file into stdout.
 .TP
