@@ -3446,7 +3446,7 @@ ACTION_D(n, n, n, clearvanished) {
 				if (verbose > 6)
 					printf(
 "Marking '%s' as used.\n", t->identifier);
-			} else if (verbose > 3 && database_allcreated()){
+			} else if (verbose > 3){
 				fprintf(stderr,
 "Strange, '%s' does not appear in packages.db yet.\n", t->identifier);
 			}

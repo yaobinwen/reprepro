@@ -61,9 +61,6 @@ static /*@null@*/ char *rdb_version, *rdb_lastsupportedversion,
 
 struct table *rdb_checksums, *rdb_contents;
 struct table *rdb_references;
-static struct {
-	bool createnewtables;
-} rdb_capabilities;
 
 static void database_free(void) {
 	if (!rdb_initialized)
@@ -612,7 +609,6 @@ static retvalue readversionfile(bool nopackagesyet) {
 			rdb_version = strdup(VERSION);
 			if (FAILEDTOALLOC(rdb_version))
 				return RET_ERROR_OOM;
-			rdb_capabilities.createnewtables = true;
 		} else
 			rdb_version = NULL;
 		rdb_lastsupportedversion = NULL;
@@ -651,14 +647,6 @@ static retvalue readversionfile(bool nopackagesyet) {
 	}
 	(void)fclose(f);
 	free(versionfilename);
-
-	/* check for enabled capabilities in the version */
-
-	r = dpkgversions_cmp(rdb_version, "3", &c);
-	if (RET_WAS_ERROR(r))
-		return r;
-	if (c >= 0)
-		rdb_capabilities.createnewtables = true;
 
 	/* ensure we can understand it */
 
@@ -2321,8 +2309,4 @@ retvalue database_translate_legacy_checksums(bool verbosedb) {
 	releaselock();
 	database_free();
 	return r;
-}
-
-bool database_allcreated(void) {
-	return rdb_capabilities.createnewtables;
 }
