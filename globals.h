@@ -52,10 +52,6 @@ typedef int _Bool;
 
 #define ARRAYCOUNT(a) (sizeof(a)/sizeof(a[0]))
 
-enum config_option_owner { 	CONFIG_OWNER_DEFAULT=0,
-				CONFIG_OWNER_FILE,
-				CONFIG_OWNER_ENVIRONMENT,
-		           	CONFIG_OWNER_CMDLINE};
 #ifndef _D_EXACT_NAMLEN
 #define _D_EXACT_NAMLEN(r) (strlen((r)->d_name))
 #endif
