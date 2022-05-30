@@ -4802,8 +4802,8 @@ bool interrupted(void) {
 		return false;
 }
 
-static void interrupt_signaled(int) /*__attribute__((signal))*/;
-static void interrupt_signaled(UNUSED(int s)) {
+static void g_fn_interrupt_signaled(int) /*__attribute__((signal))*/;
+static void g_fn_interrupt_signaled(UNUSED(int s)) {
 	was_interrupted = true;
 }
 
@@ -5001,7 +5001,7 @@ int main(int argc, char *argv[]) {
 #elif !defined(SPLINT)
 #       error "missing argument to sigaction!"
 #endif
-	sa.sa_handler = interrupt_signaled;
+	sa.sa_handler = g_fn_interrupt_signaled;
 	(void)sigaction(SIGTERM, &sa, NULL);
 	(void)sigaction(SIGABRT, &sa, NULL);
 	(void)sigaction(SIGINT, &sa, NULL);
