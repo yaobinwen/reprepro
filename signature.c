@@ -60,8 +60,12 @@ static gpg_error_t signature_getpassphrase(UNUSED(void *hook), const char *uid_h
 	if (msg == NULL)
 		return gpg_err_make(GPG_ERR_SOURCE_USER_1, GPG_ERR_ENOMEM);
 	p = getpass(msg);
-	write(fd, p, strlen(p));
-	write(fd, "\n", 1);
+	if (-1 == write(fd, p, strlen(p))) {
+		return gpg_err_code_from_errno(errno);
+	}
+	if (-1 == write(fd, "\n", 1)) {
+		return gpg_err_code_from_errno(errno);
+	}
 	free(msg);
 	return GPG_ERR_NO_ERROR;
 }
