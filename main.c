@@ -77,16 +77,8 @@
 #include "outhook.h"
 #include "package.h"
 
-#ifndef STD_BASE_DIR
-#define STD_BASE_DIR "."
-#endif
-#ifndef STD_METHOD_DIR
-#define STD_METHOD_DIR "/usr/lib/apt/methods"
-#endif
-
-#ifndef LLONG_MAX
-#define LLONG_MAX __LONG_LONG_MAX__
-#endif
+#include "macros/std.h"
+#include "macros/llong_max.h"
 
 /* global options available to the rest */
 struct global_config global;

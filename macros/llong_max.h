@@ -1,0 +1,8 @@
+#ifndef REPREPRO_MACROS_LLONG_MAX_H
+#define REPREPRO_MACROS_LLONG_MAX_H
+
+#ifndef LLONG_MAX
+#define LLONG_MAX __LONG_LONG_MAX__
+#endif
+
+#endif
