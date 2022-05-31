@@ -1,9 +1,7 @@
 #ifndef REPREPRO_NAMES_H
 #define REPREPRO_NAMES_H
 
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 char *calc_addsuffix(const char *, const char *);
 char *calc_dirconcat(const char *, const char *);
@@ -30,9 +28,6 @@ retvalue properfilenames(const struct strlist *);
 retvalue properpackagename(const char *);
 retvalue properversion(const char *);
 
-static inline bool endswith(const char *name, const char *suffix) {
-	size_t ln = strlen(name), ls = strlen(suffix);
-	return ln > ls && strcmp(name + (ln - ls), suffix) == 0;
-}
+bool endswith(const char *name, const char *suffix);
 
 #endif

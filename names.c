@@ -148,3 +148,8 @@ char *calc_changes_basename(const char *name, const char *version, const struct 
 	assert ((size_t)(p-n) == l);
 	return n;
 }
+
+bool endswith(const char *name, const char *suffix) {
+	size_t ln = strlen(name), ls = strlen(suffix);
+	return ln > ls && strcmp(name + (ln - ls), suffix) == 0;
+}
