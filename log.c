@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "strlist.h"
 #include "atoms.h"
 #include "dirs.h"

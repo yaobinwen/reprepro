@@ -26,7 +26,7 @@
 #include <dirent.h>
 
 #include "globals.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "error.h"
 #include "ignore.h"
 #include "filecntl.h"

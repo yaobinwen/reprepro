@@ -1,6 +1,8 @@
 #ifndef REPREPRO_GLOBALS_GLOBAL_CONFIG_H
 #define REPREPRO_GLOBALS_GLOBAL_CONFIG_H
 
+#include <stdbool.h>
+
 struct global_config {
 	const char *basedir;
 	const char *dbdir;

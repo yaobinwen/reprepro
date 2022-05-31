@@ -25,7 +25,7 @@
 #include <dirent.h>
 
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "names.h"
 #include "atoms.h"
 #include "filecntl.h"

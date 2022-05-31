@@ -37,7 +37,7 @@
 #endif
 #define CHECKSUMS_CONTEXT visible
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "ignore.h"
 #include "mprintf.h"
 #include "strlist.h"

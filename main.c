@@ -29,8 +29,8 @@
 #include <signal.h>
 #include "error.h"
 #define DEFINE_IGNORE_VARIABLES
-#include "globals/global_config.h"
-#include "globals/config_option_owner.h"
+#include "config_option_owner.h"
+#include "global_config.h"
 #include "ignore.h"
 #include "mprintf.h"
 #include "strlist.h"
@@ -78,11 +78,8 @@
 #include "outhook.h"
 #include "package.h"
 
-#include "macros/std.h"
-#include "macros/llong_max.h"
-
-/* global options available to the rest */
-struct global_config global;
+#include "macros_std.h"
+#include "macros_llong_max.h"
 
 /* global options */
 static char /*@only@*/ /*@notnull@*/ // *g*

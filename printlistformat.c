@@ -25,7 +25,7 @@
 #include <ctype.h>
 
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "atoms.h"
 #include "chunks.h"
 #include "target.h"

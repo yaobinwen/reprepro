@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "database.h"
 #include "checksums.h"
 #include "freespace.h"

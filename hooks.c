@@ -23,7 +23,7 @@
 #include <stdint.h>
 
 #include "error.h"
-#include "globals/var_global.h"
+#include "var_global.h"
 #include "hooks.h"
 
 void sethookenvironment(const char *causing_file, const char *causing_rule, const char *suite_from, const char *exitcode) {

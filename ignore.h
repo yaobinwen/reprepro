@@ -5,7 +5,7 @@
 #include "error.h"
 #endif
 
-#include "globals/config_option_owner.h"
+#include "config_option_owner.h"
 
 #define VALID_IGNORES \
 	IGN(ignore) \
