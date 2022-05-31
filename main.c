@@ -37,6 +37,7 @@
 #include "filterlist.h"
 #include "global_config.h"
 #include "ignore.h"
+#include "interrupt.h"
 #include "log.h"
 #include "macros_config.h"
 #include "macros_std.h"
@@ -51,39 +52,15 @@
 #include "uncompression.h"
 #include "vars_main.h"
 
+#include "args_handling.h"
+#include "enum_longopts.h"
+
 const char * package_name(void) {
 	return PACKAGE;
 }
 
 const char * package_version(void) {
 	return VERSION;
-}
-
-/*********************/
-/* argument handling */
-/*********************/
-
-#include "args_handling.h"
-#include "enum_longopts.h"
-
-static volatile bool was_interrupted = false;
-static bool interruption_printed = false;
-
-bool interrupted(void) {
-	if (was_interrupted) {
-		if (!interruption_printed) {
-			interruption_printed = true;
-			fprintf(stderr,
-"\n\nInterruption in progress, interrupt again to force-stop it (and risking database corruption!)\n\n");
-		}
-		return true;
-	} else
-		return false;
-}
-
-static void g_fn_interrupt_signaled(int) /*__attribute__((signal))*/;
-static void g_fn_interrupt_signaled(UNUSED(int s)) {
-	was_interrupted = true;
 }
 
 static void disallow_plus_prefix(const char *dir, const char *name, const char *allowed) {
