@@ -1,6 +1,8 @@
 #ifndef REPREPRO_FILECNTL_H
 #define REPREPRO_FILECNTL_H
 
+#include <stdbool.h>
+
 #ifndef HAVE_CLOSEFROM
 void closefrom(int);
 #endif
