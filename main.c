@@ -28,7 +28,6 @@
 #include <fcntl.h>
 #include <signal.h>
 #include "error.h"
-#define DEFINE_IGNORE_VARIABLES
 #include "action_handlers.h"
 #include "config_option_owner.h"
 #include "downloadcache.h"
