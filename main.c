@@ -79,6 +79,7 @@
 #include "outhook.h"
 #include "package.h"
 
+#include "macros_config.h"
 #include "macros_std.h"
 #include "macros_llong_max.h"
 
@@ -111,22 +112,6 @@ enum config_option_owner config_state,
 #define O(x) owner_ ## x = CONFIG_OWNER_DEFAULT
 O(fast), O(x_morguedir), O(x_outdir), O(x_basedir), O(x_distdir), O(x_dbdir), O(x_listdir), O(x_confdir), O(x_logdir), O(x_methoddir), O(x_section), O(x_priority), O(x_component), O(x_architecture), O(x_packagetype), O(nothingiserror), O(nolistsdownload), O(keepunusednew), O(keepunreferenced), O(keeptemporaries), O(keepdirectories), O(askforpassphrase), O(skipold), O(export), O(waitforlock), O(spacecheckmode), O(reserveddbspace), O(reservedotherspace), O(guessgpgtty), O(verbosedatabase), O(gunzip), O(bunzip2), O(unlzma), O(unxz), O(lunzip), O(gnupghome), O(listformat), O(listmax), O(listskip), O(onlysmalldeletes), O(endhook), O(outhook);
 #undef O
-
-#define CONFIGSET(variable, value) if (owner_ ## variable <= config_state) { \
-					owner_ ## variable = config_state; \
-					variable = value; }
-#define CONFIGGSET(variable, value) if (owner_ ## variable <= config_state) { \
-					owner_ ## variable = config_state; \
-					global.variable = value; }
-#define CONFIGDUP(variable, value) if (owner_ ## variable <= config_state) { \
-					owner_ ## variable = config_state; \
-					free(variable); \
-					variable = strdup(value); \
-					if (FAILEDTOALLOC(variable)) { \
-						(void)fputs("Out of Memory!", \
-								stderr); \
-						exit(EXIT_FAILURE); \
-					} }
 
 #define y(type, name) type name
 #define n(type, name) UNUSED(type dummy_ ## name)
