@@ -59,6 +59,7 @@
 #include <ctype.h>
 #include <fcntl.h>
 #include "error.h"
+#include "globals/var_global.h"
 #include "ignore.h"
 #include "mprintf.h"
 #include "strlist.h"

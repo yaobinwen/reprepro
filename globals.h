@@ -60,23 +60,6 @@ typedef int _Bool;
 
 /* global information */
 extern int verbose;
-extern struct global_config {
-	const char *basedir;
-	const char *dbdir;
-	const char *outdir;
-	const char *distdir;
-	const char *confdir;
-	const char *methoddir;
-	const char *logdir;
-	const char *listdir;
-	const char *morguedir;
-	/* flags: */
-	bool keepdirectories;
-	bool keeptemporaries;
-	bool onlysmalldeletes;
-	/* verbosity of downloading statistics */
-	int showdownloadpercent;
-} global;
 
 enum compression { c_none, c_gzip, c_bzip2, c_lzma, c_xz, c_lunzip, c_COUNT };
 

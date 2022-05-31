@@ -29,6 +29,7 @@
 #include <signal.h>
 #include "error.h"
 #define DEFINE_IGNORE_VARIABLES
+#include "globals/global_config.h"
 #include "globals/config_option_owner.h"
 #include "ignore.h"
 #include "mprintf.h"

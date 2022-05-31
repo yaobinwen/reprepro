@@ -25,6 +25,7 @@
 #include <sys/wait.h>
 
 #include "error.h"
+#include "globals/var_global.h"
 #include "filecntl.h"
 #include "mprintf.h"
 #include "strlist.h"

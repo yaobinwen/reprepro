@@ -26,6 +26,7 @@
 #include <ctype.h>
 #include <time.h>
 #include "error.h"
+#include "globals/var_global.h"
 #include "mprintf.h"
 #include "atoms.h"
 #include "sources.h"

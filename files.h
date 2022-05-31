@@ -1,6 +1,8 @@
 #ifndef REPREPRO_FILES_H
 #define REPREPRO_FILES_H
 
+#include "globals/var_global.h"
+
 #ifndef REPREPRO_ERROR_H
 #include "error.h"
 #warning "What's hapening here?"
