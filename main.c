@@ -79,6 +79,7 @@
 #include "outhook.h"
 #include "package.h"
 
+#include "macros_action.h"
 #include "macros_config.h"
 #include "macros_std.h"
 #include "macros_llong_max.h"
@@ -112,90 +113,6 @@ enum config_option_owner config_state,
 #define O(x) owner_ ## x = CONFIG_OWNER_DEFAULT
 O(fast), O(x_morguedir), O(x_outdir), O(x_basedir), O(x_distdir), O(x_dbdir), O(x_listdir), O(x_confdir), O(x_logdir), O(x_methoddir), O(x_section), O(x_priority), O(x_component), O(x_architecture), O(x_packagetype), O(nothingiserror), O(nolistsdownload), O(keepunusednew), O(keepunreferenced), O(keeptemporaries), O(keepdirectories), O(askforpassphrase), O(skipold), O(export), O(waitforlock), O(spacecheckmode), O(reserveddbspace), O(reservedotherspace), O(guessgpgtty), O(verbosedatabase), O(gunzip), O(bunzip2), O(unlzma), O(unxz), O(lunzip), O(gnupghome), O(listformat), O(listmax), O(listskip), O(onlysmalldeletes), O(endhook), O(outhook);
 #undef O
-
-#define y(type, name) type name
-#define n(type, name) UNUSED(type dummy_ ## name)
-
-#define ACTION_N(act, sp, args, name) static retvalue action_n_ ## act ## _ ## sp ## _ ## name ( \
-			UNUSED(struct distribution *dummy2),         \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			int argc, args(const char *, argv[]))
-
-#define ACTION_C(act, sp, name) static retvalue action_c_ ## act ## _ ## sp ## _ ## name ( \
-			struct distribution *alldistributions,       \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			int argc, const char *argv[])
-
-#define ACTION_B(act, sp, u, name) static retvalue action_b_ ## act ## _ ## sp ## _ ## name ( \
-			u(struct distribution *, alldistributions),  \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			int argc, const char *argv[])
-
-#define ACTION_L(act, sp, u, args, name) static retvalue action_l_ ## act ## _ ## sp ## _ ## name ( \
-			struct distribution *alldistributions,       \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			int argc, args(const char *, argv[]))
-
-#define ACTION_R(act, sp, d, a, name) static retvalue action_r_ ## act ## _ ## sp ## _ ## name ( \
-			d(struct distribution *, alldistributions),  \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			a(int, argc), a(const char *, argv[]))
-
-#define ACTION_T(act, sp, name) static retvalue action_t_ ## act ## _ ## sp ## _ ## name ( \
-			UNUSED(struct distribution *ddummy),         \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			UNUSED(int argc), UNUSED(const char *dummy4[]))
-
-#define ACTION_F(act, sp, d, a, name) static retvalue action_f_ ## act ## _ ## sp ## _ ## name ( \
-			d(struct distribution *, alldistributions),  \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			a(int, argc), a(const char *, argv[]))
-
-#define ACTION_RF(act, sp, ud, u, name) static retvalue action_rf_ ## act ## _ ## sp ## _ ## name ( \
-			ud(struct distribution *, alldistributions),  \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			u(int, argc), u(const char *, argv[]))
-
-#define ACTION_D(act, sp, u, name) static retvalue action_d_ ## act ## _ ## sp ## _ ## name ( \
-			struct distribution *alldistributions,       \
-			sp(const char *, section),                   \
-			sp(const char *, priority),                  \
-			act(const struct atomlist *, architectures), \
-			act(const struct atomlist *, components),    \
-			act(const struct atomlist *, packagetypes),  \
-			u(int, argc), u(const char *, argv[]))
 
 ACTION_N(n, n, y, printargs) {
 	int i;
