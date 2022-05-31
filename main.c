@@ -364,8 +364,3 @@ int main(int argc, char *argv[]) {
 	signatures_done();
 	myexit(EXIT_FAILURE);
 }
-
-retvalue package_newcontrol_by_cursor(struct package_cursor *cursor, const char *newcontrol, size_t newcontrollen) {
-	return cursor_replace(cursor->target->packages, cursor->cursor,
-			newcontrol, newcontrollen);
-}

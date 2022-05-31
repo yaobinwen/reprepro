@@ -38,31 +38,13 @@ retvalue package_remove_each(struct distribution *, const struct atomlist *, con
 
 retvalue package_get(struct target *, const char * /*name*/, /*@null@*/ const char */*version*/, /*@out@*/ struct package *);
 
-static inline void package_done(struct package *pkg) {
-	free(pkg->pkgname);
-	free(pkg->pkgchunk);
-	free(pkg->pkgversion);
-	free(pkg->pkgsource);
-	free(pkg->pkgsrcversion);
-	memset(pkg, 0, sizeof(*pkg));
-}
+void package_done(struct package *pkg);
 
 retvalue package_getversion(struct package *);
 retvalue package_getsource(struct package *);
 retvalue package_getarchitecture(struct package *);
 
-static inline char *package_dupversion(struct package *package) {
-	assert (package->version != NULL);
-	if (package->pkgversion == NULL)
-		return strdup(package->version);
-	else {
-		// steal version from package
-		// (caller must ensure it is not freed while still needed)
-		char *v = package->pkgversion;
-		package->pkgversion = NULL;
-		return v;
-	}
-}
+char *package_dupversion(struct package *package);
 
 struct package_cursor {
 	/*@temp@*/struct target *target;

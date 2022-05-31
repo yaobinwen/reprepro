@@ -23,6 +23,7 @@ reprepro_SOURCES = \
 	args_handling.c \
 	interrupt.c \
 	main_helpers.c \
+	package.c \
 	var_global.c \
 	vars_main.c \
 	outhook.c \
