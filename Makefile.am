@@ -20,6 +20,7 @@ changestool_LDADD = $(ARCHIVELIBS)
 
 reprepro_SOURCES = \
 	action_handlers.c \
+	args_handling.c \
 	main_helpers.c \
 	var_global.c \
 	vars_main.c \
