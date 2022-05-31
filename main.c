@@ -81,33 +81,8 @@
 #include "macros_std.h"
 #include "macros_llong_max.h"
 
-/* global options */
-static char /*@only@*/ /*@notnull@*/ // *g*
-	*x_basedir = NULL,
-	*x_outdir = NULL,
-	*x_distdir = NULL,
-	*x_dbdir = NULL,
-	*x_listdir = NULL,
-	*x_confdir = NULL,
-	*x_logdir = NULL,
-	*x_morguedir = NULL,
-	*x_methoddir = NULL;
-static char /*@only@*/ /*@null@*/
-	*x_section = NULL,
-	*x_priority = NULL,
-	*x_component = NULL,
-	*x_architecture = NULL,
-	*x_packagetype = NULL;
-static char /*@only@*/ /*@null@*/ *listformat = NULL;
-static char /*@only@*/ /*@null@*/ *endhook = NULL;
-static char /*@only@*/ /*@null@*/ *outhook = NULL;
-static char /*@only@*/
-	*gunzip = NULL,
-	*bunzip2 = NULL,
-	*unlzma = NULL,
-	*unxz = NULL,
-	*lunzip = NULL,
-	*gnupghome = NULL;
+#include "vars_main.h"
+
 static int 	listmax = -1;
 static int 	listskip = 0;
 static int	delete = D_COPY;
