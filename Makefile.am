@@ -19,6 +19,7 @@ reprepro_LDADD = $(ARCHIVELIBS) $(DBLIBS)
 changestool_LDADD = $(ARCHIVELIBS)
 
 reprepro_SOURCES = \
+	action_handlers.c \
 	main_helpers.c \
 	var_global.c \
 	vars_main.c \

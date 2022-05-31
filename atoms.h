@@ -1,6 +1,11 @@
 #ifndef REPREPRO_ATOMS_H
 #define REPREPRO_ATOMS_H
 
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
+#include "retvalue.h"
+
 typedef int atom_t;
 typedef atom_t architecture_t;
 typedef atom_t component_t;

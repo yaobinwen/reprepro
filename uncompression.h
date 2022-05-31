@@ -1,6 +1,8 @@
 #ifndef REPREPRO_UNCOMPRESS_H
 #define REPREPRO_UNCOMPRESS_H
 
+#include <unistd.h>
+
 /* "", ".gz", ... */
 extern const char * const uncompression_suffix[c_COUNT];
 extern /*@null@*/ char *extern_uncompressors[c_COUNT];

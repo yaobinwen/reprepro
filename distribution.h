@@ -3,25 +3,13 @@
 
 struct distribution;
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_TARGET_H
 #include "target.h"
-#endif
-#ifndef REPREPRO_EXPORTS_H
 #include "exports.h"
-#endif
-#ifndef REPREPRO_CONTENTS_H
 #include "contents.h"
-#endif
+
 struct overridefile;
 struct uploaders;
 
