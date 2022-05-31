@@ -32,6 +32,7 @@
 #include "config_option_owner.h"
 #include "global_config.h"
 #include "ignore.h"
+#include "main_helpers.h"
 #include "mprintf.h"
 #include "strlist.h"
 #include "atoms.h"
@@ -4770,29 +4771,6 @@ bool interrupted(void) {
 static void g_fn_interrupt_signaled(int) /*__attribute__((signal))*/;
 static void g_fn_interrupt_signaled(UNUSED(int s)) {
 	was_interrupted = true;
-}
-
-static void myexit(int) __attribute__((__noreturn__));
-static void myexit(int status) {
-	free(x_dbdir);
-	free(x_distdir);
-	free(x_listdir);
-	free(x_logdir);
-	free(x_confdir);
-	free(x_basedir);
-	free(x_outdir);
-	free(x_methoddir);
-	free(x_component);
-	free(x_architecture);
-	free(x_packagetype);
-	free(x_section);
-	free(x_priority);
-	free(x_morguedir);
-	free(gnupghome);
-	free(endhook);
-	free(outhook);
-	pool_free();
-	exit(status);
 }
 
 static void disallow_plus_prefix(const char *dir, const char *name, const char *allowed) {

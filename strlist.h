@@ -1,6 +1,8 @@
 #ifndef REPREPRO_STRLIST_H
 #define REPREPRO_STRLIST_H
 
+#include <stdio.h>
+
 #ifndef REPREPRO_ERROR_H
 #include "error.h"
 #warning "What's hapening here?"
