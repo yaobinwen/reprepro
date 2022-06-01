@@ -1,15 +1,7 @@
 #ifndef REPREPRO_BYHANDHOOK_H
 #define REPREPRO_BYHANDHOOK_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-
-#ifndef REPREPRO_ERROR_H
-#include "error.h"
-#warning "What's hapening here?"
-#endif
 
 struct byhandhook;
 

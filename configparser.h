@@ -1,15 +1,9 @@
 #ifndef REPREPRO_CONFIGPARSER_H
 #define REPREPRO_CONFIGPARSER_H
 
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_CHECKS_H
 #include "checks.h"
-#endif
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
 
 struct configiterator;
 

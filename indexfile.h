@@ -1,13 +1,8 @@
 #ifndef REPREPRO_INDEXFILE_H
 #define REPREPRO_INDEXFILE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_TARGET_H
 #include "target.h"
-#endif
 
 struct indexfile;
 struct package;

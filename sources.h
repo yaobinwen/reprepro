@@ -1,13 +1,8 @@
 #ifndef REPREPRO_SOURCES_H
 #define REPREPRO_SOURCES_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_TARGET_H
 #include "target.h"
-#endif
 
 /* Functions for the target.h-stuff: */
 get_version sources_getversion;

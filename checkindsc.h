@@ -1,19 +1,10 @@
 #ifndef REPREPRO_CHECKINDSC_H
 #define REPREPRO_CHECKINDSC_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
-#ifndef REPREPRO_SOURCES_H
 #include "sources.h"
-#endif
 
 /* insert the given .dsc into the mirror in <component> in the <distribution>
  * if component is NULL, guess it from the section. */

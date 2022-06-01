@@ -1,12 +1,8 @@
 #ifndef REPREPRO_APTMETHOD_H
 #define REPREPRO_APTMETHOD_H
 
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_CHECKSUMS_H
 #include "checksums.h"
-#endif
 
 struct aptmethodrun;
 struct aptmethod;

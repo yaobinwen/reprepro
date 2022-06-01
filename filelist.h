@@ -1,9 +1,7 @@
 #ifndef REPREPRO_FILELIST_H
 #define REPREPRO_FILELIST_H
 
-#ifndef REPREPRO_RELEASE_H
 #include "release.h"
-#endif
 
 struct filelist_list;
 struct package;

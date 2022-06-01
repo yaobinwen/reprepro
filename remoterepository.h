@@ -1,19 +1,10 @@
 #ifndef REPREPRO_REMOTEREPOSITORY_H
 #define REPREPRO_REMOTEREPOSITORY_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_APTMETHOD_H
 #include "aptmethod.h"
-#endif
-#ifndef REPREPRO_DONEFILE_H
 #include "donefile.h"
-#endif
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
 
 struct remote_repository;
 struct remote_distribution;

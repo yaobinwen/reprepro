@@ -1,19 +1,10 @@
 #ifndef REPREPRO_PULLS_H
 #define REPREPRO_PULLS_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_RELEASE_H
 #include "release.h"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 struct pull_rule;
 struct pull_distribution;

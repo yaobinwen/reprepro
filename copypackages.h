@@ -1,9 +1,7 @@
 #ifndef REPREPRO_COPYPACKAGES_H
 #define REPREPRO_COPYPACKAGES_H
 
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 retvalue copy_by_name(struct distribution * /*into*/, struct distribution * /*from*/, int, const char **, const struct atomlist *, const struct atomlist *, const struct atomlist *);
 retvalue copy_by_source(struct distribution * /*into*/, struct distribution * /*from*/, int, const char **, const struct atomlist *, const struct atomlist *, const struct atomlist *);

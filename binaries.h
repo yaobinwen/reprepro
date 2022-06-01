@@ -1,16 +1,9 @@
 #ifndef REPREPRO_BINARIES_H
 #define REPREPRO_BINARIES_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_TARGET_H
 #include "target.h"
-#endif
-#ifndef REPREPRO_CHECKSUMS_H
 #include "checksums.h"
-#endif
 
 
 /* Functions for the target.h-stuff: */

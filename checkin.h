@@ -1,19 +1,10 @@
 #ifndef REPREPRO_CHECKIN_H
 #define REPREPRO_CHECKIN_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
 
 /* insert the given .changes into the mirror in the <distribution>
  * if forcecomponent, forcesection or forcepriority is NULL

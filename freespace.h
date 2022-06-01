@@ -1,9 +1,7 @@
 #ifndef REPREPRO_FREESPACE_H
 #define REPREPRO_FREESPACE_H
 
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
 
 struct devices;
 enum spacecheckmode { scm_NONE, /* scm_ASSUMESINGLEFS, */ scm_FULL };

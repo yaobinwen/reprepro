@@ -1,13 +1,8 @@
 #ifndef REPREPRO_CHECKSUMS_H
 #define REPREPRO_CHECKSUMS_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 enum checksumtype {
 		/* must be first */

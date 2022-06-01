@@ -1,15 +1,9 @@
 #ifndef REPREPRO_DATABASE_H
 #define REPREPRO_DATABASE_H
 
-#ifndef REPREPRO_GLOBALS_H
 #include "globals.h"
-#endif
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 struct distribution;
 struct table;

@@ -1,14 +1,8 @@
 #ifndef REPREPRO_CHUNKEDIT_H
 #define REPREPRO_CHUNKEDIT_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-
 
 /* modifications of a chunk: */
 struct chunkeditfield {

@@ -1,9 +1,7 @@
 #ifndef REPREPRO_FORCE_H
 #define REPREPRO_FORCE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#endif
 
 #include "config_option_owner.h"
 

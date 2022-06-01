@@ -1,12 +1,8 @@
 #ifndef REPREPRO_LOG_H
 #define REPREPRO_LOG_H
 
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_HOOKS_H
 #include "hooks.h"
-#endif
 
 struct target;
 struct logger;

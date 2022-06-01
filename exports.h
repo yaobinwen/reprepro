@@ -1,9 +1,7 @@
 #ifndef REPREPRO_EXPORTS_H
 #define REPREPRO_EXPORTS_H
 
-#ifndef REPREPRO_RELEASE_H
 #include "release.h"
-#endif
 
 struct exportmode {
 	/* "Packages", "Sources" or something like that */

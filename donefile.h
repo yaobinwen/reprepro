@@ -1,9 +1,7 @@
 #ifndef REPREPRO_DONEFILE_H
 #define REPREPRO_DONEFILE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#endif
 
 struct checksums;
 

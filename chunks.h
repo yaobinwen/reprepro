@@ -1,13 +1,8 @@
 #ifndef REPREPRO_CHUNKS_H
 #define REPREPRO_CHUNKS_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
 
 /* look for name in chunk. returns RET_NOTHING if not found */
 retvalue chunk_getvalue(const char *, const char *, /*@out@*/char **);

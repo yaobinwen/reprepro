@@ -2,15 +2,9 @@
 #define REPREPRO_TRACKING_H
 
 
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_TRACKINGT_H
 #include "trackingt.h"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
 
 retvalue tracking_parse(struct distribution *, struct configiterator *);
 

@@ -1,23 +1,11 @@
 #ifndef REPREPRO_UPDATES_H
 #define REPREPRO_UPDATES_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_RELEASE_H
 #include "release.h"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_FREESPACE_H
 #include "freespace.h"
-#endif
-
 
 struct update_pattern;
 struct update_origin;

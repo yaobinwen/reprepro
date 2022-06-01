@@ -1,19 +1,9 @@
 #ifndef REPREPRO_REFERENCE_H
 #define REPREPRO_REFERENCE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's happening?"
-#endif
-
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#warning "What's happening?"
-#endif
-
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
 
 struct references;
 

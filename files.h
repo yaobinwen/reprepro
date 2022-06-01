@@ -2,17 +2,9 @@
 #define REPREPRO_FILES_H
 
 #include "var_global.h"
-
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_NAMES_H
 #include "names.h"
-#endif
 
 struct checksums;
 struct checksumsarray;

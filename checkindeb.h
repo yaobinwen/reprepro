@@ -1,16 +1,9 @@
 #ifndef REPREPRO_CHECKINDEB_H
 #define REPREPRO_CHECKINDEB_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DISTRIBUTION_H
 #include "distribution.h"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
 
 /* insert the given .deb into the mirror in <component> in the <distribution>
  * putting things with architecture of "all" into <architectures> (and also

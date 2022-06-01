@@ -1,9 +1,7 @@
 #ifndef REPREPRO_HOOKS_H
 #define REPREPRO_HOOKS_H
 
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
 
 /* the command currently processed (may not changed till all loggers are run) */
 extern command_t causingcommand;

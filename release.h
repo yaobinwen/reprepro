@@ -1,16 +1,9 @@
 #ifndef REPREPRO_RELEASE_H
 #define REPREPRO_RELEASE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
 
 struct release;
 

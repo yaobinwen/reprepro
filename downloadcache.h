@@ -1,26 +1,12 @@
 #ifndef REPREPRO_DOWNLOADLIST_H
 #define REPREPRO_DOWNLOADLIST_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_APTMETHOD_H
 #include "aptmethod.h"
-#endif
-#ifndef REPREPRO_CHECKSUMS_H
 #include "checksums.h"
-#endif
-#ifndef REPREPRO_FREESPACE_H
 #include "freespace.h"
-#endif
 
 struct downloaditem;
 

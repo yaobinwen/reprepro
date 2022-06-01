@@ -1,9 +1,7 @@
 #ifndef REPREPRO_CHANGES_H
 #define REPREPRO_CHANGES_H
 
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
 
 typedef enum {
 	fe_UNKNOWN=0,

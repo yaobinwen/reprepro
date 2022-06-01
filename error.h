@@ -1,10 +1,7 @@
 #ifndef REPREPRO_ERROR_H
 #define REPREPRO_ERROR_H
 
-#ifndef REPREPRO_GLOBALS_H
 #include "globals.h"
-#endif
-
 #include "retvalue.h"
 
 bool interrupted(void);

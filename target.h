@@ -1,27 +1,13 @@
 #ifndef REPREPRO_TARGET_H
 #define REPREPRO_TARGET_H
 
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_NAMES_H
 #include "names.h"
-#endif
-#ifndef REPREPRO_ATOMS_H
 #include "atoms.h"
-#endif
-#ifndef REPREPRO_DATABASE_H
 #include "database.h"
-#endif
-#ifndef REPREPRO_TRACKINGT_H
 #include "trackingt.h"
-#endif
-#ifndef REPREPRO_CHECKSUMS_H
 #include "checksums.h"
-#endif
-#ifndef REPREPRO_EXPORTS_H
 #include "exports.h"
-#endif
 
 struct target;
 struct alloverrides;

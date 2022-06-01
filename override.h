@@ -1,16 +1,9 @@
 #ifndef REPREPRO_OVERRIDE_H
 #define REPREPRO_OVERRIDE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
-#ifndef REPREPRO_STRLIST_H
 #include "strlist.h"
-#endif
-#ifndef REPREPRO_CHUNKS_H
 #include "chunks.h"
-#endif
 
 struct overridefile;
 struct overridedata;

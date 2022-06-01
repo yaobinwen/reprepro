@@ -1,10 +1,7 @@
 #ifndef REPREPRO_SIGNATURE_H
 #define REPREPRO_SIGNATURE_H
 
-#ifndef REPREPRO_ERROR_H
 #include "error.h"
-#warning "What's hapening here?"
-#endif
 
 /* does not need to be called if allowpassphrase if false,
  * argument will only take effect if called the first time */
