@@ -1,0 +1,12 @@
+targets:
+  - name: aptmethod.h
+    deps:
+      - aptmethod.c
+      - checksums.h
+      - checksums.c
+      - database.h
+      - database.c
+      - globals.h
+      - retvalue.h
+      - strlist.h
+      - strlist.c
